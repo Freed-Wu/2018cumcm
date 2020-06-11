@@ -1,0 +1,33 @@
+% !TEX root = ../main.tex
+\makeatletter
+%-------------------------------------------------------------------------------------------------------
+\title{\textbf{仿操作系统的智能RGV静态调度模型}}
+\author{}
+\date{}
+%-------------------------------------------------------------------------------------------------------
+%页眉页脚%与book&report冲突
+\pagestyle{fancy}
+\renewcommand{\headrulewidth}{0pt}
+\lhead{}
+\chead{}
+\rhead{}
+\lfoot{\small{第\chinese{section}节}}
+\cfoot{\small{第\thepage 页~共\pageref{LastPage}页}}
+\rfoot{}
+%-------------------------------------------------------------------------------------------------------
+%枚举%与beamer冲突
+\usepackage{enumitem}
+\setlist[enumerate, 1]
+{	fullwidth,
+	label = \arabic*.,
+	font = \textup,
+	itemindent=2em
+}
+\setlist[enumerate, 2]
+{	fullwidth,
+	label = \arabic*),
+	font = \textup,
+	itemindent=2em
+}
+%-------------------------------------------------------------------------------------------------------
+\makeatother

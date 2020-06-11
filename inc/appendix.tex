@@ -1,0 +1,25 @@
+% !TEX root = ../main.tex
+\addcontentsline{toc}{section}{附录}
+\begin{appendix}
+	\section{代码}
+		\subsection{主程序和穷举搜索}
+			\subsubsection{主程序}
+				\langCVfile[matlab][主程序][Matlab]{main.m}{src/main/main.m}
+			\subsubsection{穷举搜索最优静态优先级排序}
+				\langCVfile[matlab][穷举搜索最优静态优先级排序][Matlab]{findRank.m}{src/main/findRank.m}
+			\subsubsection{穷举搜索最优CNC工序分配分布}
+				\langCVfile[matlab][穷举搜索最优CNC工序分配分布][Matlab]{findKind.m}{src/main/findKind.m}
+		\subsection{主程序和模拟退火}
+			\subsubsection{主程序}
+				\langCVfile[matlab][模拟退火搜索最优静态调度和最优CNC工序分配分布的主程序][Matlab]{main4anneal.m}{src/main/main4anneal.m}
+			\subsubsection{模拟退火搜索最优静态调度和最优CNC工序分配分布}
+				\langCVfile[matlab][模拟退火搜索最优静态调度和最优CNC工序分配分布][Matlab]{anneal.m}{src/main/anneal.m}
+	\section{代码运行部分结果}
+		\subsection{主程序和穷举搜索}
+			\subsubsection{主程序}\label{主程序结果}
+				\matlablightfile{MATLAB Command Window}{src/main/main.txt}
+			\subsubsection{穷举搜索最优静态优先级}\label{穷举搜索最优静态优先级排序结果}
+				\matlablightfile{MATLAB Command Window}{src/main/findRank.txt}
+			\subsubsection{穷举搜索最优CNC工序分配分布}\label{穷举搜索最优CNC工序分配分布结果}
+				\matlablightfile{MATLAB Command Window}{src/main/findKind.txt}
+\end{appendix}

@@ -1,0 +1,511 @@
+% !TEX root = ../main.tex
+\makeatletter
+%-------------------------------------------------------------------------------------------------------
+%颜色
+\xdefinecolor{lightBlue}{rgb}{0.22,0.45,0.70}
+\xdefinecolor{darkGrey}{rgb}{0.45,0.45,0.45}
+\xdefinecolor{dkgreen}{rgb}{0, 0.6, 0}
+\xdefinecolor{gray}{rgb}{0.5, 0.5, 0.5}
+\xdefinecolor{mauve}{rgb}{0.58, 0, 0.82}
+\xdefinecolor{DeepSkyBlue}{RGB}{0, 104, 139}
+\xdefinecolor{dkpurple}{rgb}{0.455, 0.204, 0.506}
+
+\newif\ifTJ@green
+\newif\ifTJ@orange
+\newif\ifTJ@violet
+\TJ@greentrue
+\TJ@orangefalse
+\TJ@violetfalse
+\ifTJ@green
+	\xdefinecolor{cvgreen}{HTML}{92D14F}
+	\xdefinecolor{cvgray}{HTML}{D8E4BE}
+	\xdefinecolor{cvtext}{HTML}{92909B}
+\else
+\fi
+\ifTJ@orange
+	\xdefinecolor{cvgreen}{RGB}{230, 140, 20}
+	\xdefinecolor{cvgray}{RGB}{248, 216, 174}
+	\xdefinecolor{cvtext}{RGB}{100, 100, 100}
+\else
+\fi
+\ifTJ@violet
+	\xdefinecolor{cvgreen}{RGB}{142, 10, 178}
+	\xdefinecolor{cvgray}{RGB}{209, 181, 217}
+	\xdefinecolor{cvtext}{RGB}{100, 100, 100}
+\else
+\fi
+%-------------------------------------------------------------------------------------------------------
+%字符
+\usepackage{ctex}
+% \xeCJKsetup
+% {	CJKecglue = {\hskip 0.10em plus 0.05em minus 0.05em},
+% 	CheckSingle = true
+% }
+% \setCJKmainfont
+% [	BoldFont = {Noto Serif CJK SC Bold},
+% 	ItalicFont = {AR PL UKai HK}
+% ]{Noto Serif CJK SC ExtraLight}
+% \setCJKsansfont
+% [	BoldFont = {Noto Sans S Chinese Medium},
+% 	%	ItalicFont = {Noto Sans S Chinese DemiLight}
+% ]{SimSun}
+% \setCJKmonofont
+% [	BoldFont = {Adobe Heiti Std},
+% 	ItalicFont = {Adobe Kaiti Std}
+% ]{WenQuanYi Micro Hei Mono Light}
+% \setCJKfamilyfont{zhkesong}{MF KeSong (Noncommercial)}
+% \setCJKfamilyfont{zhhjsd}{MF TheGoldenEra (Noncommercial)}
+% \setCJKfamilyfont{zhlangsong}{MF LangSong (Noncommercial)}
+
+% \newcommand{\hjsd}{\CJKfamily{zhhjsd}}
+% \newcommand{\KeSong}{\CJKfamily{zhkesong}}
+% \newcommand{\langsong}{\CJKfamily{zhlangsong}}
+% \newfontfamily\KeSongf[Mapping = tex-text]{MF KeSong (Noncommercial)}
+% \newfontfamily\hjsdf[Mapping = tex-text]{MF TheGoldenEra (Noncommercial)}
+% \newfontfamily\langsongf[Mapping = tex-text]{MF LangSong (Noncommercial)}
+% \newfontfamily\SourceCodePro[Mapping = tex-text]{Source Code Pro}
+% \newfontfamily\monaco{Monaco}
+
+% \usepackage{microtype}
+%-------------------------------------------------------------------------------------------------------
+%长度
+%-------------------------------------------------------------------------------------------------------
+%图形
+%%流程图
+\tikzstyle{level 2 concept} += [sibling angle = 40]
+\tikzstyle{startstop} =
+[	rectangle, rounded corners,
+minimum width = 2cm,
+minimum height = 1cm,
+text centered,
+draw = black,
+fill = red! 40
+]
+\tikzstyle{io} =
+[	trapezium,
+trapezium left angle = 70,
+trapezium right angle = 110,
+minimum width = 2cm,
+minimum height = 1cm,
+text centered,
+draw = black,
+fill = blue! 40
+]
+\tikzstyle{process} =
+[	rectangle,
+minimum width = 2cm,
+minimum height = 1cm,
+text centered,
+draw = black,
+fill = yellow! 50
+]
+\tikzstyle{decision} =
+[	diamond,
+aspect = 3,
+text centered,
+draw = black,
+fill = green! 30
+]
+\tikzstyle{arrow} =
+[	->,
+> = stealth
+]
+%%进度条
+\newcommand{\progressbar}[2][2cm]{%
+	\textcolor{lightBlue}{\rule{#1 * \real{#2} / 100}{1.5ex}}%
+	\textcolor{darkGrey!15}{\rule{#1 - #1 * \real{#2} / 100}{1.5ex}}
+}
+%-------------------------------------------------------------------------------------------------------
+%表格
+\usepackage{boxie}
+%%MatLab命令行
+\newcommand{\MatlabLogo}{%
+	\begin{tikzpicture}[x=2.4ex,y=2.4ex,line width=0ex,scale=1]
+		\node[draw,fill=white,text=white] at (0, 0) (a) {
+				\includegraphics[width=2.4ex]{matlabLogo/matlabLogo.ai}
+			};
+	\end{tikzpicture}
+}
+\tcbset{%
+	skin=enhanced,%
+	matlab/.style={%
+		skin=bicolor,%
+		boxrule=0.1mm,%
+		%toptitle=1ex,
+		sharp corners,
+		breakable,%
+		colbacktitle=WinGray,%
+		colframe=WinGray,%
+		coltitle=black,%
+		fonttitle=\sffamily,%\bfseries,
+		fontupper=\small\sffamily,
+		fontlower=\small\sffamily,
+		frame style={%
+			draw=WinBlue,%
+			left color=WinBlue,%
+			right color=WinBlue%
+		},%
+		overlay unbroken = {%
+			\node[inner sep=0pt,anchor=north west,yshift=-3pt,xshift=1.2pt,text=black]
+			at (frame.north west){\MatlabLogo};% \fbox{\faTerminal}
+			\node[inner sep=0pt,anchor=north east,yshift=-3pt,xshift=-8pt,text=black] at (frame.north
+			east){\rule{0.8em}{0.6pt}\quad$\square$\quad{\Large$\times$}};
+		},%
+		overlay first = {%
+			\node[inner sep=0pt,anchor=north west,yshift=-3pt,xshift=1.0pt,text=black]
+			at (frame.north west){\MatlabLogo};%\small ~\faWindows
+			\node[inner sep=0pt,anchor=north east,yshift=-3pt,xshift=-8pt,text=black] at (frame.north
+			east){\rule{0.8em}{0.6pt}\quad$\square$\quad{\Large$\times$}};
+		}%
+	},
+	matlablight/.style={
+		matlab,%
+		colback=white,%
+		colupper=black,%
+		%coltext=black%
+	},
+	matlabdark/.style={
+		matlab,%
+		colback=black,%
+		colupper=white,%
+		%coltext=white%
+	}
+}
+\DeclareTCBListing{matlabdarkc}{ m m }{%
+	listing engine=minted,%
+	minted style=trac,%
+	minted options={%
+		autogobble,%
+		breaklines,%
+		fontsize=\wuhao,%
+		baselinestretch=0.6,%
+		breaksymbolleft={},%
+		numbersep=3mm%
+	},%
+	listing and comment,%
+	colbacklower=tcbcol@back!5!yellow!10!white,%
+	collower=linux,%
+	matlabdark,%
+	title={#2},%
+	comment={\small\sffamily#1},%
+	minted language=bat%
+}
+\DeclareTCBListing{matlablightc}{ m m }{%
+	listing engine=minted,%
+	minted style=trac,%
+	minted options={%
+		autogobble,%
+		breaklines,%
+		fontsize=\wuhao,%
+		baselinestretch=0.6,%
+		breaksymbolleft={},%
+		numbersep=3mm%
+	},%
+	listing and comment,%
+	colbacklower=tcbcol@back!5!yellow!10!white,%
+	collower=linux,%
+	matlablight,%
+	title={#2},%
+	comment={\small\sffamily#1},%
+	minted language=bat%
+}
+\DeclareTCBListing{matlabdark}{ m }{%
+	listing engine=minted,%
+	minted style=trac,%
+	minted options={%
+		autogobble,%
+		breaklines,%
+		fontsize=\wuhao,%
+		baselinestretch=0.6,%
+		breaksymbolleft={},%
+		numbersep=3mm%
+	},%
+	listing only,%
+	matlabdark,%
+	title={#1},%
+	minted language=bat%
+}
+\DeclareTCBListing{matlablight}{ m }{%
+	listing engine=minted,%
+	minted style=trac,%
+	minted options={%
+		autogobble,%
+		breaklines,%
+		fontsize=\wuhao,%
+		baselinestretch=0.6,%
+		breaksymbolleft={},%
+		numbersep=3mm%
+	},%
+	listing only,%
+	matlablight,%
+	title={#1},%
+	minted language=bat%
+}
+\newtcbinputlisting{\matlabdarkcfile}[3]{%
+	listing engine=minted,%
+	minted style=trac,%
+	minted options={%
+		autogobble,%
+		breaklines,%
+		fontsize=\wuhao,%
+		baselinestretch=0.6,%
+		breaksymbolleft={},%
+		numbersep=3mm%
+	},%
+	listing and comment,%
+	colbacklower=tcbcol@back!5!yellow!10!white,%
+	collower=linux,%
+	matlabdark,%
+	listing file={#3},
+	title={#2},%
+	comment={\small\sffamily#1},%
+	minted language=bat%
+}% end matlabdarkcfile
+
+% 将文件做为窗口内容的Windows终端窗口样式命令
+% 第1个参数是窗口底端提示信息
+% 第2个参数是窗口标题
+% 第3个参数是包含窗口内容的文件全路径名称(可以是相对路径)
+\newtcbinputlisting{\matlablightcfile}[3]{%
+	listing engine=minted,%
+	minted style=trac,%
+	minted options={%
+		autogobble,%
+		breaklines,%
+		fontsize=\wuhao,%
+		baselinestretch=0.6,%
+		breaksymbolleft={},%
+		numbersep=3mm%
+	},%
+	listing and comment,%
+	colbacklower=tcbcol@back!5!yellow!10!white,%
+	collower=linux,%
+	matlablight,%
+	listing file={#3},
+	title={#2},%
+	comment={\small\sffamily#1},%
+	minted language=bat%
+}% end matlablightcfile
+
+% 将文件做为窗口内容的Windows终端窗口样式命令
+% 第1个参数是窗口标题
+% 第2个参数是包含窗口内容的文件全路径名称(可以是相对路径)
+\newtcbinputlisting{\matlabdarkfile}[2]{%
+	listing engine=minted,%
+	minted style=trac,%
+	minted options={%
+		autogobble,%
+		breaklines,%
+		fontsize=\wuhao,%
+		baselinestretch=0.6,%
+		breaksymbolleft={},%
+		numbersep=3mm%
+	},%
+	listing only,%
+	matlabdark,%
+	listing file={#2},
+	title={#1},%
+	minted language=bat%
+}% end matlabdarkfile
+
+% 将文件做为窗口内容的Windows终端窗口样式命令
+% 第1个参数是窗口标题
+% 第2个参数是包含窗口内容的文件全路径名称(可以是相对路径)
+\newtcbinputlisting{\matlablightfile}[2]{%
+	listing engine=minted,%
+	minted style=trac,%
+	minted options={%
+		autogobble,%
+		breaklines,%
+		fontsize=\wuhao,%
+		baselinestretch=0.6,%
+		breaksymbolleft={},%
+		numbersep=3mm%
+	},%
+	listing only,%
+	matlablight,%
+	listing file={#2},
+	title={#1},%
+	minted language=bat%
+}% end matlablightfile
+%%优缺点
+\tcbset
+{	strweak/.style={
+		colframe = yellow! 50! green,
+		colback = white,
+		fonttitle = \bfseries,
+		left = 0mm,
+		right = 0mm,
+		top = 0mm,
+		bottom = 0mm,
+		boxsep = 0mm,
+		toptitle = 0.5mm,
+		bottomtitle = 0.5mm,
+		nobeforeafter, center title
+	}
+}
+\newtcbtheorem{strength}{\it 优点}
+{	enhanced, breakable,
+	strweak,
+	colback = white,
+	colframe = cyan,
+	colbacktitle = cyan,
+	attach boxed title to top left =
+	{	yshift = -2mm,
+		xshift = 5mm
+	},
+	boxed title style = {sharp corners},
+	fonttitle = \sffamily\bfseries,
+	separator sign = {\it ：}
+}{}
+\newtcbtheorem{weakness}{\it 缺点}
+{	enhanced, breakable,
+	strweak,
+	colback = white,
+	colframe = gray,
+	colbacktitle = gray,
+	attach boxed title to top left =
+	{	yshift = -2mm,
+		xshift = 5mm
+	},
+	boxed title style = {sharp corners},
+	fonttitle = \sffamily\bfseries,
+	separator sign = {\it ：}
+}{}
+%-------------------------------------------------------------------------------------------------------
+%公式
+%-------------------------------------------------------------------------------------------------------
+%正文
+%%链接
+\usepackage
+[	colorlinks = true,
+linkcolor = gray,
+citecolor = gray,
+backref=page
+]{hyperref}
+%-------------------------------------------------------------------------------------------------------
+%非正文
+%%代码
+\setminted[Matlab]
+{	mathescape,breaklines,linenos,
+	fontsize=\footnotesize,
+	numbersep=3mm,
+	highlightcolor=green,
+	escapeinside=``
+}
+\renewcommand*\lstlistingname{代码}
+\lstset
+{	language = Matlab, 			%thelanguageofthecode
+	basicstyle =\tiny\monaco, 		%thesizeofthefontsthatareusedforthecode
+	numbers = left, 				%wheretoputtheline-numbers
+	numberstyle = \tiny\color{gray}\monaco, 	%thestylethatisusedfortheline-numbers
+	stepnumber = 1, 			%thestepbetweentwoline-numbers.Ifit's1, eachlinewillbenumbered
+	numbersep = 5pt, 			%howfartheline-numbersarefromthecode
+	backgroundcolor = \color{white}, %choosethebackgroundcolor.Youmustadd\usepackage{color}
+	showspaces = false, 			%showspacesaddingparticularunderscores
+	showstringspaces = false, 		%underlinespaceswithinstrings
+	showtabs = false, 			%showtabswithinstringsaddingparticularunderscores
+	frame = single, 				%addsaframearoundthecode
+	rulecolor = \color{black}, 		%ifnotset, theframe-colormaybechangedonline-breakswithinnot-blacktext(e.g.commens(greenhere))
+	tabsize = 4, 				%setsdefaulttabsizeto2spaces
+	captionpos = b, 				%setsthecaption-positiontobottom
+	breaklines = true, 			%setsautomaticlinebreaking
+	breakatwhitespace = false, 	%setsifautomaticbreaksshouldonlyhappenatwhitespace
+	title = \lstname, 				%showthefilenameoffilesincludedwith\lstinputlisting; alsotrycaptioninsteadoftitle
+	keywordstyle = \color{blue}, 	%keywordstyle
+	commentstyle = \color{dkgreen}, %commentstyle
+	stringstyle = \color{mauve}, 	%stringliteralstyle
+	escapeinside = ``, 			%ifyouwanttoaddLaTeXwithinyourcode
+	morekeywords = {*, ...},		%ifyouwanttoaddmorekeywordstotheset
+	columns=flexible
+}
+%-------------------------------------------------------------------------------------------------------
+%其它
+%代码行号不可复制
+\usepackage{accsupp}
+% \renewcommand{\thelstnumber}{\protect\BeginAccSupp{ActualText={}}\arabic{lstnumber}\protect\EndAccSupp{}}
+%正文内容不可复制
+%\usepackage[resetfonts]{cmap}
+%\usepackage{fancyvrb}
+%\begin{VerbatimOut}{main.cmap}
+%%!PS-Adobe-3.0 Resource-CMap
+%%%DocumentNeededResources: ProcSet (CIDInit)
+%%%IncludeResource: ProcSet (CIDInit)
+%%%BeginResource: CMap (TeX-OT1-0)
+%%%Title: (TeX-OT1-0 TeX OT1 0)
+%%%Version: 1.000
+%%%EndComments
+%/CIDInit /ProcSet findresource begin
+%12 dict begin
+%begincmap
+%/CIDSystemInfo
+%<< /Registry (TeX)
+%/Ordering (OT1)
+%/Supplement 0
+%>> def
+%/CMapName /TeX-OT1-0 def
+%/CMapType 2 def
+%1 begincodespacerange
+%<00> <7F>
+%endcodespacerange
+%8 beginbfrange
+%<00> <01> <0000>
+%<09> <0A> <0000>
+%<23> <26> <0000>
+%<28> <3B> <0000>
+%<3F> <5B> <0000>
+%<5D> <5E> <0000>
+%<61> <7A> <0000>
+%<7B> <7C> <0000>
+%endbfrange
+%40 beginbfchar
+%<02> <0000>
+%<03> <0000>
+%<04> <0000>
+%<05> <0000>
+%<06> <0000>
+%<07> <0000>
+%<08> <0000>
+%<0B> <0000>
+%<0C> <0000>
+%<0D> <0000>
+%<0E> <0000>
+%<0F> <0000>
+%<10> <0000>
+%<11> <0000>
+%<12> <0000>
+%<13> <0000>
+%<14> <0000>
+%<15> <0000>
+%<16> <0000>
+%<17> <0000>
+%<18> <0000>
+%<19> <0000>
+%<1A> <0000>
+%<1B> <0000>
+%<1C> <0000>
+%<1D> <0000>
+%<1E> <0000>
+%<1F> <0000>
+%<21> <0000>
+%<22> <0000>
+%<27> <0000>
+%<3C> <0000>
+%<3D> <0000>
+%<3E> <0000>
+%<5C> <0000>
+%<5F> <0000>
+%<60> <0000>
+%<7D> <0000>
+%<7E> <0000>
+%<7F> <0000>
+%endbfchar
+%endcmap
+%CMapName currentdict /CMap defineresource pop
+%end
+%end
+%%%EndResource
+%%%EOF
+%\end{VerbatimOut}
+%-------------------------------------------------------------------------------------------------------
+\makeatother
